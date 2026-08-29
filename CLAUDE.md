@@ -11,10 +11,15 @@ Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Int
 
 ## Structure
 - `index.html` — page unique, sections `#profil`, `#projets`, `#competences`, `#experience`, `#contact`.
-- `assets/css/style.css` — tous les styles.
+- `assets/css/style.css` — tous les styles. Palette sobre (blanc cassé + accent indigo), pas de fond quadrillé.
 - `assets/js/main.js` — comportement du menu mobile uniquement.
-- `assets/images/` — portrait, captures de projets (vide pour l'instant).
-- `assets/documents/` — CV PDF à ajouter et lier depuis la section contact.
+- `assets/images/` — `portrait.png` (hero).
+- `assets/documents/` — CV, mémoire et slides de recherche.
+
+## Projets (vérifiés comme réels, appartenant à Amadou Ly)
+- **Nombres de Salem de trace −3** — mémoire de recherche M1 (co-écrit avec Ancelle Priscille Nahimana, dir. Jean-Marc Sac-Épée). Fichiers : `Memoire_Nombres_de_Salem.pdf`, `Presentation_Nombres_de_Salem.pdf`.
+- Le projet "Prédiction des prix immobiliers à Metz" a été retiré du site à la demande du propriétaire (29/08/2026) ; ses fichiers ont été supprimés du dépôt.
+- Ne jamais réintroduire de projet générique/inventé (ex. classification de maladies cardiovasculaires, dashboard Power BI) sans fichier source réel fourni par le propriétaire.
 
 ## Règles
 - Conserver l'identité visuelle validée (palette verte/encre, police Fraunces + IBM Plex).
