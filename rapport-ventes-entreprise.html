@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registre des Ventes — Amadou Ly</title>
+<meta name="description" content="Analyse complète des ventes d'une entreprise de vente en ligne (données réelles, 2010-2011) : indicateurs clés, saisonnalité, produits, marchés et segmentation client.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F5EF;
+  --surface:#FFFFFF;
+  --surface-2:#F7FAF6;
+  --ink:#151D16;
+  --ink-2:#4C5A4D;
+  --ink-muted:#889389;
+  --line:#DCE5D9;
+  --line-strong:#BFCCBB;
+  --accent:#A66E1E;
+  --accent-ink:#7A4E12;
+  --accent-soft:#F3E7D2;
+  --danger:#A13B32;
+  --danger-soft:#F7E5E1;
+  --danger-line:#E3BEB6;
+  --series-blue:#2a78d6;
+  --series-orange:#eb6834;
+  --shadow: 0 1px 2px rgba(21,29,22,0.05), 0 8px 24px -12px rgba(21,29,22,0.14);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10140F;
+    --surface:#171C15;
+    --surface-2:#1C221A;
+    --ink:#EEF2EC;
+    --ink-2:#B7C2B4;
+    --ink-muted:#7C887A;
+    --line:#2A332A;
+    --line-strong:#3B473A;
+    --accent:#D9A24E;
+    --accent-ink:#E8C084;
+    --accent-soft:#2E2515;
+    --danger:#E08A7D;
+    --danger-soft:#2E1A16;
+    --danger-line:#4A2A22;
+    --series-blue:#3987e5;
+    --series-orange:#d95926;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10140F;
+  --surface:#171C15;
+  --surface-2:#1C221A;
+  --ink:#EEF2EC;
+  --ink-2:#B7C2B4;
+  --ink-muted:#7C887A;
+  --line:#2A332A;
+  --line-strong:#3B473A;
+  --accent:#D9A24E;
+  --accent-ink:#E8C084;
+  --accent-soft:#2E2515;
+  --danger:#E08A7D;
+  --danger-soft:#2E1A16;
+  --danger-line:#4A2A22;
+  --series-blue:#3987e5;
+  --series-orange:#d95926;
+  --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 8px 24px -12px rgba(0,0,0,0.55);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Archivo', system-ui, sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Fraunces', Georgia, serif;
+  font-weight:600;
+  margin:0;
+  text-wrap:balance;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+}
+a{color:var(--accent-ink); text-decoration-thickness:1px;}
+.mono{font-family:'IBM Plex Mono', ui-monospace, monospace;}
+.tab{font-variant-numeric: tabular-nums;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+::selection{background:var(--accent-soft); color:var(--accent-ink);}
+
+.backbar{border-bottom:1px dashed var(--line-strong); padding:14px 28px;}
+.backbar .inner{max-width:1180px; margin:0 auto;}
+.backbar a{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--ink-2); text-decoration:none; display:inline-flex; align-items:center; gap:6px;}
+.backbar a:hover{color:var(--accent-ink);}
+
+.shell{
+  display:grid;
+  grid-template-columns:220px minmax(0,780px);
+  justify-content:center;
+  gap:56px;
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 28px 120px;
+}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr; padding:0 20px 80px;}
+  .toc{display:none;}
+}
+
+header.mast{border-bottom:1px dashed var(--line-strong); padding:40px 28px 28px;}
+.mast-inner{max-width:1180px; margin:0 auto;}
+.mast-eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:0.76rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--accent-ink);
+  display:flex; align-items:center; gap:10px;
+  margin-bottom:18px;
+}
+.mast-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--series-orange);}
+h1.title{font-size:clamp(1.9rem, 4vw, 2.6rem); line-height:1.08; max-width:20ch; margin-bottom:14px;}
+.mast-sub{color:var(--ink-2); font-size:1.05rem; max-width:62ch; margin-bottom:24px;}
+.mast-meta{display:flex; flex-wrap:wrap; gap:24px; font-size:0.86rem; color:var(--ink-muted);}
+.mast-meta .k{display:block; font-family:'IBM Plex Mono', monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink-muted); margin-bottom:2px;}
+.mast-meta .v{color:var(--ink-2); font-weight:500;}
+
+.toc{position:sticky; top:32px; align-self:start; padding-top:56px;}
+.toc-list{list-style:none; margin:0; padding:0; border-left:1px dashed var(--line-strong);}
+.toc-list a{display:block; padding:9px 0 9px 18px; font-size:0.86rem; color:var(--ink-muted); text-decoration:none; border-left:2px solid transparent; margin-left:-1px; transition:color .15s ease;}
+.toc-list a:hover{color:var(--ink);}
+.toc-list .num{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--ink-muted); margin-right:8px;}
+
+main{padding-top:56px; min-width:0;}
+section.sec{padding-bottom:64px; scroll-margin-top:24px; border-bottom:1px dashed var(--line);}
+section.sec:last-of-type{border-bottom:none;}
+.sec-head{display:flex; align-items:baseline; gap:12px; margin-bottom:20px;}
+.sec-head .num{font-family:'IBM Plex Mono', monospace; font-size:0.82rem; color:var(--accent-ink); background:var(--accent-soft); padding:3px 8px; border-radius:3px;}
+.sec-head h2{font-size:1.5rem;}
+.sec p{max-width:66ch; color:var(--ink-2); font-size:1rem;}
+.sec p + p{margin-top:14px;}
+.lede{font-size:1.08rem; color:var(--ink); max-width:66ch;}
+
+.callout{border:1px solid var(--line); background:var(--surface-2); border-radius:8px; padding:18px 20px; margin:20px 0; font-size:0.94rem; color:var(--ink-2);}
+.callout.warn{background:var(--danger-soft); border-color:var(--danger-line); color:var(--ink);}
+.callout .lbl{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--danger); display:block; margin-bottom:6px;}
+.callout.info{background:var(--accent-soft); border-color:var(--accent-soft);}
+.callout.info .lbl{color:var(--accent-ink);}
+
+.receipt{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:4px 0;
+  margin:22px 0;
+  box-shadow:var(--shadow);
+}
+.receipt-row{display:flex; justify-content:space-between; align-items:baseline; padding:11px 22px; border-bottom:1px dashed var(--line);}
+.receipt-row:last-child{border-bottom:none;}
+.receipt-row .label{font-size:0.9rem; color:var(--ink-2);}
+.receipt-row .amount{font-family:'IBM Plex Mono', monospace; font-size:1.05rem; font-weight:600; color:var(--ink); font-variant-numeric: tabular-nums;}
+.receipt-row.total{background:var(--accent-soft);}
+.receipt-row.total .label, .receipt-row.total .amount{color:var(--accent-ink); font-weight:700;}
+
+.chart-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 22px 16px; box-shadow:var(--shadow); margin:22px 0;}
+.chart-card h3{font-size:0.98rem; font-weight:600; margin-bottom:2px; font-family:'Archivo',sans-serif;}
+.chart-card .chart-note{font-size:0.8rem; color:var(--ink-muted); margin-bottom:14px;}
+.chart-card svg{display:block; width:100%; height:auto; overflow:visible;}
+.axis-label{font-family:'IBM Plex Mono', monospace; font-size:10px; fill:var(--ink-muted);}
+.grid-line{stroke:var(--line); stroke-width:1;}
+.bar-blue{fill:var(--series-blue);}
+.bar-orange{fill:var(--series-orange);}
+.value-tag{font-family:'IBM Plex Mono', monospace; font-size:11px; fill:var(--ink);}
+
+.two-col-charts{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+@media (max-width:640px){.two-col-charts{grid-template-columns:1fr;}}
+
+.stat-row{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden; margin:22px 0;}
+.stat-tile{background:var(--surface); padding:16px 18px;}
+.stat-tile .v{font-family:'IBM Plex Mono', monospace; font-size:1.4rem; font-weight:600; color:var(--ink); display:block; font-variant-numeric: tabular-nums;}
+.stat-tile .l{font-size:0.78rem; color:var(--ink-muted); margin-top:4px; display:block;}
+
+.example-card{display:flex; align-items:center; gap:20px; background:var(--accent-soft); border:1px solid var(--accent-soft); border-radius:10px; padding:20px 22px; margin:22px 0;}
+.example-card .big{font-family:'IBM Plex Mono', monospace; font-size:1.5rem; font-weight:600; color:var(--accent-ink); white-space:nowrap;}
+.example-card .desc{font-size:0.92rem; color:var(--ink-2);}
+
+.limits-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:20px 0;}
+@media (max-width:640px){.limits-grid{grid-template-columns:1fr;}}
+.limit-item{border-left:2px solid var(--danger-line); padding-left:14px; font-size:0.9rem; color:var(--ink-2);}
+.limit-item strong{color:var(--ink); display:block; margin-bottom:3px; font-size:0.92rem;}
+
+.tags{display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 6px;}
+.tags span{font-family:'IBM Plex Mono', monospace; font-size:0.74rem; border:1px solid var(--line); color:var(--ink-2); padding:3px 8px; border-radius:3px;}
+
+.footer-links{display:flex; gap:14px; flex-wrap:wrap; margin-top:24px;}
+.footer-links a{display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line-strong); padding:10px 16px; border-radius:6px; font-size:0.88rem; color:var(--ink); text-decoration:none; font-weight:500; transition:border-color .15s ease, background .15s ease;}
+.footer-links a:hover{border-color:var(--accent); background:var(--accent-soft);}
+.footer-links a.primary{background:var(--ink); color:var(--surface); border-color:var(--ink);}
+.footer-links a.primary:hover{opacity:0.9;}
+.source-note{font-size:0.8rem; color:var(--ink-muted); margin-top:6px;}
+</style>
+</head>
+<body>
+
+<div class="backbar"><div class="inner"><a href="index.html#projets">&larr; Retour au portfolio</a></div></div>
+
+<header class="mast">
+  <div class="mast-inner">
+    <div class="mast-eyebrow"><span class="dot"></span>DOSSIER TECHNIQUE · BUSINESS INTELLIGENCE</div>
+    <h1 class="title">Analyse des ventes d'une entreprise — Online Retail</h1>
+    <p class="mast-sub">Un an de transactions réelles d'un e-commerçant britannique, analysées pour en tirer indicateurs de performance, saisonnalité, produits phares et segmentation client.</p>
+    <div class="mast-meta">
+      <div><span class="k">Auteur</span><span class="v">Amadou Ly</span></div>
+      <div><span class="k">Source</span><span class="v">UCI Machine Learning Repository</span></div>
+      <div><span class="k">Période</span><span class="v">Déc. 2010 – Déc. 2011</span></div>
+      <div><span class="k">Échantillon</span><span class="v">530 103 lignes de vente</span></div>
+      <div><span class="k">Outils</span><span class="v">Python · Pandas · Matplotlib</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="Sommaire">
+    <ul class="toc-list">
+      <li><a href="#contexte"><span class="num">01</span>Contexte</a></li>
+      <li><a href="#donnees"><span class="num">02</span>Origine des données</a></li>
+      <li><a href="#nettoyage"><span class="num">03</span>Nettoyage</a></li>
+      <li><a href="#kpi"><span class="num">04</span>Indicateurs clés</a></li>
+      <li><a href="#saisonnalite"><span class="num">05</span>Saisonnalité</a></li>
+      <li><a href="#produits"><span class="num">06</span>Produits &amp; marchés</a></li>
+      <li><a href="#clients"><span class="num">07</span>Segmentation client</a></li>
+      <li><a href="#limites"><span class="num">08</span>Limites</a></li>
+      <li><a href="#conclusion"><span class="num">09</span>Conclusion</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <section class="sec" id="contexte">
+      <div class="sec-head"><span class="num">01</span><h2>Contexte et objectif</h2></div>
+      <p class="lede">Comprendre la performance commerciale d'une entreprise à partir de ses données de vente brutes est l'un des exercices fondamentaux de l'analyse de données appliquée au commerce.</p>
+      <p>L'objectif est d'analyser un an de transactions réelles pour en extraire des indicateurs de pilotage (chiffre d'affaires, panier moyen, taux de retour), comprendre les rythmes de vente (saisonnalité mensuelle, hebdomadaire, horaire), identifier les produits et marchés les plus rentables, et segmenter la clientèle pour prioriser les actions commerciales.</p>
+      <div class="tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span><span>RFM</span><span>Analyse temporelle</span></div>
+    </section>
+
+    <section class="sec" id="donnees">
+      <div class="sec-head"><span class="num">02</span><h2>Origine des données</h2></div>
+      <p>Les données proviennent du jeu <strong>"Online Retail"</strong>, publié par le <a href="https://archive.ics.uci.edu/dataset/352/online+retail" target="_blank" rel="noopener">UCI Machine Learning Repository</a>. Elles recensent les transactions réelles (anonymisées) d'une entreprise britannique de vente en ligne de cadeaux et d'articles de décoration, entre décembre 2010 et décembre 2011.</p>
+      <div class="callout info">
+        <span class="lbl">À savoir</span>
+        L'entreprise vend surtout à des <strong>professionnels et revendeurs</strong> plutôt qu'à des particuliers — ce qui explique des commandes en plus grandes quantités et un panier moyen élevé par rapport à un site grand public classique.
+      </div>
+      <p>Le jeu brut comprend <strong>541 909 lignes</strong> de commande, réparties sur <strong>38 pays</strong> et plus de <strong>4 300 clients</strong> identifiés par un numéro de compte.</p>
+    </section>
+
+    <section class="sec" id="nettoyage">
+      <div class="sec-head"><span class="num">03</span><h2>Nettoyage et préparation</h2></div>
+      <p>Le fichier brut mélange ventes et <strong>annulations</strong> (numéro de facture préfixé par « C »). On isole d'abord les annulations pour mesurer le taux de retour, puis on ne conserve que les lignes de vente valides (quantité et prix strictement positifs).</p>
+
+      <div class="stat-row">
+        <div class="stat-tile"><span class="v tab">541 909</span><span class="l">lignes de commande brutes</span></div>
+        <div class="stat-tile"><span class="v tab">14,8 %</span><span class="l">de factures annulées</span></div>
+        <div class="stat-tile"><span class="v tab">530 103</span><span class="l">lignes de vente valides</span></div>
+      </div>
+
+      <div class="callout warn">
+        <span class="lbl">Anomalie détectée et retirée</span>
+        Une ligne isolée enregistre <strong>80 995 unités</strong> du produit « Paper Craft, Little Birdie » en une seule commande — plus du double de la plus grosse commande suivante sur tout le jeu de données. Il s'agit très probablement d'une erreur de saisie : cette ligne (£168 470) est retirée pour ne pas fausser l'analyse.
+      </div>
+    </section>
+
+    <section class="sec" id="kpi">
+      <div class="sec-head"><span class="num">04</span><h2>Indicateurs clés</h2></div>
+      <p>Une fois les données nettoyées, quatre indicateurs résument la performance sur la période observée.</p>
+      <div class="receipt">
+        <div class="receipt-row"><span class="label">Commandes valides</span><span class="amount tab">19 959</span></div>
+        <div class="receipt-row"><span class="label">Clients identifiés</span><span class="amount tab">4 338</span></div>
+        <div class="receipt-row"><span class="label">Panier moyen</span><span class="amount tab">£525,99</span></div>
+        <div class="receipt-row total"><span class="label">Chiffre d'affaires total</span><span class="amount tab">£10 498 215</span></div>
+      </div>
+      <p class="source-note">Période : 1er décembre 2010 – 9 décembre 2011 (le mois de décembre 2011 est incomplet, arrêté au 9).</p>
+    </section>
+
+    <section class="sec" id="saisonnalite">
+      <div class="sec-head"><span class="num">05</span><h2>Saisonnalité</h2></div>
+      <p>Les ventes suivent des rythmes mensuels, hebdomadaires et journaliers marqués.</p>
+
+      <div class="chart-card">
+        <h3>Chiffre d'affaires mensuel</h3>
+        <div class="chart-note">Décembre 2010 – décembre 2011 (dernier mois incomplet)</div>
+        <svg id="chart-month" viewBox="0 0 640 280" role="img" aria-label="Evolution du chiffre d'affaires mensuel"></svg>
+      </div>
+
+      <div class="two-col-charts">
+        <div class="chart-card">
+          <h3>Par jour de la semaine</h3>
+          <div class="chart-note">Chiffre d'affaires cumulé</div>
+          <svg id="chart-dow" viewBox="0 0 300 260" role="img" aria-label="Chiffre d'affaires par jour de la semaine"></svg>
+        </div>
+        <div class="chart-card">
+          <h3>Par heure de la journée</h3>
+          <div class="chart-note">Chiffre d'affaires cumulé</div>
+          <svg id="chart-hour" viewBox="0 0 300 260" role="img" aria-label="Chiffre d'affaires par heure de la journee"></svg>
+        </div>
+      </div>
+      <div class="callout info">
+        <span class="lbl">Observation</span>
+        Aucune vente n'est enregistrée le <strong>samedi</strong> : l'entreprise ne traite pas les commandes ce jour-là — une caractéristique réelle de son fonctionnement, pas un artefact des données.
+      </div>
+    </section>
+
+    <section class="sec" id="produits">
+      <div class="sec-head"><span class="num">06</span><h2>Produits &amp; marchés</h2></div>
+      <p>Les frais de port, ajustements manuels et bons cadeaux sont exclus de ces classements pour ne comparer que de vrais produits.</p>
+
+      <div class="chart-card">
+        <h3>Top 10 produits par chiffre d'affaires</h3>
+        <div class="chart-note">Hors frais de port, ajustements et bons cadeaux</div>
+        <svg id="chart-products" viewBox="0 0 640 300" role="img" aria-label="Top 10 produits par chiffre d'affaires"></svg>
+      </div>
+
+      <div class="chart-card">
+        <h3>Top 10 marchés export (hors Royaume-Uni)</h3>
+        <div class="chart-note">Le Royaume-Uni représente à lui seul 84,4 % du chiffre d'affaires total</div>
+        <svg id="chart-countries" viewBox="0 0 640 300" role="img" aria-label="Top 10 marches export hors Royaume-Uni"></svg>
+      </div>
+    </section>
+
+    <section class="sec" id="clients">
+      <div class="sec-head"><span class="num">07</span><h2>Segmentation client (analyse RFM)</h2></div>
+      <p>Chaque client identifié est noté selon trois dimensions — <strong>Récence</strong> (dernier achat), <strong>Fréquence</strong> (nombre de commandes) et <strong>Montant</strong> (chiffre d'affaires généré) — puis classé en six segments métier.</p>
+
+      <div class="two-col-charts">
+        <div class="chart-card">
+          <h3>Chiffre d'affaires par segment</h3>
+          <div class="chart-note">4 338 clients identifiés</div>
+          <svg id="chart-seg-rev" viewBox="0 0 300 280" role="img" aria-label="Chiffre d'affaires par segment client"></svg>
+        </div>
+        <div class="chart-card">
+          <h3>Nombre de clients par segment</h3>
+          <div class="chart-note">4 338 clients identifiés</div>
+          <svg id="chart-seg-count" viewBox="0 0 300 280" role="img" aria-label="Nombre de clients par segment"></svg>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <h3>Concentration du chiffre d'affaires (courbe de Pareto)</h3>
+        <div class="chart-note">% cumulé du chiffre d'affaires en fonction du % cumulé de clients, triés par valeur décroissante</div>
+        <svg id="chart-pareto" viewBox="0 0 560 380" role="img" aria-label="Courbe de Pareto de la concentration du chiffre d'affaires"></svg>
+      </div>
+
+      <div class="example-card">
+        <div class="big tab">74,1 %</div>
+        <div class="desc">du chiffre d'affaires (clients identifiés) est généré par les <strong>20 % de clients les plus actifs</strong> — un déséquilibre classique qui justifie de concentrer les efforts de fidélisation sur les segments Champions et Fidèles.</div>
+      </div>
+    </section>
+
+    <section class="sec" id="limites">
+      <div class="sec-head"><span class="num">08</span><h2>Limites</h2></div>
+      <div class="limits-grid">
+        <div class="limit-item"><strong>Clients non identifiés</strong>Environ 16,7 % du chiffre d'affaires provient d'achats sans numéro de compte, exclus de la segmentation RFM.</div>
+        <div class="limit-item"><strong>Un seul cycle annuel</strong>Une année de données ne permet pas de confirmer si la saisonnalité se répète d'une année sur l'autre.</div>
+        <div class="limit-item"><strong>Nature B2B du portefeuille</strong>Les résultats (panier moyen élevé, concentration forte) reflètent une clientèle de revendeurs, pas un site grand public classique.</div>
+        <div class="limit-item"><strong>Décembre 2011 incomplet</strong>Les données s'arrêtent le 9 décembre 2011, ce qui sous-estime la performance du dernier mois.</div>
+      </div>
+    </section>
+
+    <section class="sec" id="conclusion">
+      <div class="sec-head"><span class="num">09</span><h2>Conclusion</h2></div>
+      <p>Cette analyse met en œuvre une démarche complète de Data Analysis sur des <strong>données réelles de vente</strong> : nettoyage rigoureux (annulations, anomalies, codes non-produits), indicateurs de pilotage, analyse temporelle, analyse produits/marchés et segmentation client par la méthode RFM. La concentration élevée du chiffre d'affaires (74 % généré par 20 % des clients) est l'enseignement le plus actionnable pour orienter une stratégie commerciale.</p>
+      <div class="footer-links">
+        <a class="primary" href="index.html#projets">Voir le portfolio</a>
+        <a href="assets/documents/analyse_ventes_entreprise.ipynb" target="_blank" rel="noopener">Notebook complet</a>
+        <a href="assets/documents/customer_segments_rfm.csv" target="_blank" rel="noopener">Segments clients (CSV)</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  const NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs){
+    const e = document.createElementNS(NS, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function fmtK(v){ return '£' + Math.round(v/1000) + 'k'; }
+
+  /* ---- Generic vertical bar chart ---- */
+  function barChart(svgId, items, opts){
+    const svg = document.getElementById(svgId);
+    const W = opts.W, H = opts.H, ML = opts.ml, MR = opts.mr, MT = opts.mt, MB = opts.mb;
+    const plotW = W - ML - MR, plotH = H - MT - MB;
+    const maxVal = opts.maxVal || Math.max.apply(null, items.map(d => d.value));
+    const gap = opts.gap != null ? opts.gap : 4;
+    const barW = plotW / items.length - gap;
+    const color = opts.color || css('--series-blue');
+
+    const ticks = 4;
+    for (let i = 0; i <= ticks; i++){
+      const y = MT + plotH - (plotH * i / ticks);
+      svg.appendChild(el('line', {x1:ML, x2:W-MR, y1:y, y2:y, class:'grid-line'}));
+      const t = el('text', {x: ML-8, y: y+3, class:'axis-label', 'text-anchor':'end'});
+      t.textContent = opts.yFmt ? opts.yFmt(maxVal * i / ticks) : Math.round(maxVal * i / ticks);
+      svg.appendChild(t);
+    }
+    items.forEach(function(d, i){
+      const x = ML + i * (barW + gap);
+      const h = (d.value / maxVal) * plotH;
+      const y = MT + plotH - h;
+      svg.appendChild(el('rect', {x:x, y:y, width:barW, height:Math.max(h,0), class: d.cls || 'bar-blue', rx:2}));
+      if (!opts.skipLabels || i % opts.skipLabels === 0){
+        const lbl = el('text', {x: x + barW/2, y: H-10, class:'axis-label', 'text-anchor':'middle'});
+        lbl.textContent = d.label;
+        svg.appendChild(lbl);
+      }
+    });
+    svg.appendChild(el('line', {x1:ML, x2:W-MR, y1:MT+plotH, y2:MT+plotH, stroke: css('--line-strong'), 'stroke-width':1}));
+  }
+
+  /* ---- Generic horizontal bar chart ---- */
+  function hBarChart(svgId, items, opts){
+    const svg = document.getElementById(svgId);
+    const W = opts.W, H = opts.H, ML = opts.ml, MR = opts.mr, MT = opts.mt, MB = opts.mb;
+    const plotW = W - ML - MR, plotH = H - MT - MB;
+    const rowH = plotH / items.length;
+    const maxVal = Math.max.apply(null, items.map(d => d.value));
+    const color = opts.color || css('--series-blue');
+
+    items.forEach(function(d, i){
+      const y = MT + i*rowH + rowH*0.2;
+      const barH = rowH * 0.6;
+      const w = (d.value/maxVal) * plotW;
+      const lbl = el('text', {x: ML-10, y: y + barH/2 + 4, class:'axis-label', 'text-anchor':'end'});
+      lbl.textContent = d.label.length > 28 ? d.label.slice(0,26) + '…' : d.label;
+      svg.appendChild(lbl);
+      svg.appendChild(el('rect', {x:ML, y:y, width:Math.max(w,2), height:barH, fill:color, rx:3}));
+      const vt = el('text', {x: ML + w + 8, y: y + barH/2 + 4, class:'value-tag'});
+      vt.textContent = opts.valueFmt ? opts.valueFmt(d.value) : d.value;
+      svg.appendChild(vt);
+    });
+  }
+
+  /* ---- 1. Revenue by month (line) ---- */
+  (function(){
+    const monthData = [
+      ["2010-12",823746],["2011-01",691365],["2011-02",523632],["2011-03",717639],
+      ["2011-04",537809],["2011-05",770536],["2011-06",761740],["2011-07",719221],
+      ["2011-08",759138],["2011-09",1058590],["2011-10",1154979],["2011-11",1509496],["2011-12",470323]
+    ];
+    const svg = document.getElementById("chart-month");
+    const W=640,H=280,ML=54,MR=12,MT=14,MB=40;
+    const plotW=W-ML-MR, plotH=H-MT-MB;
+    const maxV = 1600000;
+    const stepX = plotW/(monthData.length-1);
+    const blue = css('--series-blue');
+    function xOf(i){ return ML+i*stepX; }
+    function yOf(v){ return MT+plotH-(v/maxV)*plotH; }
+
+    [0,400000,800000,1200000,1600000].forEach(function(t){
+      const y=yOf(t);
+      svg.appendChild(el('line',{x1:ML,x2:W-MR,y1:y,y2:y,class:'grid-line'}));
+      const lab=el('text',{x:ML-8,y:y+3,class:'axis-label','text-anchor':'end'});
+      lab.textContent = fmtK(t); svg.appendChild(lab);
+    });
+
+    let path="";
+    monthData.forEach(function(d,i){ const x=xOf(i),y=yOf(d[1]); path += (i===0?"M":"L")+x+","+y+" "; });
+    svg.appendChild(el('path',{d:path, fill:'none', stroke:blue, 'stroke-width':2.5, 'stroke-linejoin':'round','stroke-linecap':'round'}));
+    monthData.forEach(function(d,i){
+      const x=xOf(i), y=yOf(d[1]);
+      svg.appendChild(el('circle',{cx:x,cy:y,r:3.5, fill:css('--surface'), stroke:blue,'stroke-width':2}));
+      if (i%2===0){
+        const lx = el('text',{x:x,y:H-16,class:'axis-label','text-anchor':'middle'});
+        lx.textContent = d[0].slice(2).replace('-','/'); svg.appendChild(lx);
+      }
+    });
+    svg.appendChild(el('line',{x1:ML,x2:W-MR,y1:MT+plotH,y2:MT+plotH,stroke:css('--line-strong'),'stroke-width':1}));
+  })();
+
+  /* ---- 2. Revenue by day of week ---- */
+  barChart("chart-dow", [
+    {label:"Lun", value:1779575}, {label:"Mar", value:2178633}, {label:"Mer", value:1851148},
+    {label:"Jeu", value:2203161}, {label:"Ven", value:1671871}, {label:"Sam", value:0}, {label:"Dim", value:813828}
+  ], {W:300,H:260,ml:14,mr:10,mt:16,mb:34, yFmt:fmtK, gap:8});
+
+  /* ---- 3. Revenue by hour ---- */
+  barChart("chart-hour", [
+    {label:"6",value:4},{label:"7",value:31059},{label:"8",value:283869},{label:"9",value:821798},
+    {label:"10",value:1446743},{label:"11",value:1239954},{label:"12",value:1444246},{label:"13",value:1265736},
+    {label:"14",value:1181812},{label:"15",value:1352972},{label:"16",value:754007},{label:"17",value:461603},
+    {label:"18",value:144813},{label:"19",value:50665},{label:"20",value:18933}
+  ], {W:300,H:260,ml:14,mr:6,mt:16,mb:34, yFmt:fmtK, gap:2, skipLabels:3});
+
+  /* ---- 4. Top products by revenue ---- */
+  hBarChart("chart-products", [
+    {label:"Regency Cakestand 3 Tier", value:174485},
+    {label:"White Hanging Heart T-Light Holder", value:106293},
+    {label:"Party Bunting", value:99504},
+    {label:"Jumbo Bag Red Retrospot", value:94340},
+    {label:"Medium Ceramic Top Storage Jar", value:81701},
+    {label:"Rabbit Night Light", value:66965},
+    {label:"Paper Chain Kit 50's Christmas", value:64952},
+    {label:"Assorted Colour Bird Ornament", value:59095},
+    {label:"Chilli Lights", value:54118},
+    {label:"Spotty Bunting", value:42548}
+  ], {W:640,H:300,ml:230,mr:60,mt:6,mb:6, color:css('--series-blue'), valueFmt: v => '£'+Math.round(v/1000)+'k'});
+
+  /* ---- 5. Top export countries ---- */
+  hBarChart("chart-countries", [
+    {label:"Pays-Bas", value:285446},
+    {label:"Irlande (Eire)", value:283454},
+    {label:"Allemagne", value:228867},
+    {label:"France", value:209715},
+    {label:"Australie", value:138521},
+    {label:"Espagne", value:61577},
+    {label:"Suisse", value:57090},
+    {label:"Belgique", value:41196},
+    {label:"Suède", value:38378},
+    {label:"Japon", value:37416}
+  ], {W:640,H:300,ml:130,mr:60,mt:6,mb:6, color:css('--series-orange'), valueFmt: v => '£'+Math.round(v/1000)+'k'});
+
+  /* ---- 6 & 7. Segments ---- */
+  const segData = [
+    {label:"Champions", value:4436405},
+    {label:"Fidèles", value:3028165},
+    {label:"Perdus", value:767150},
+    {label:"Réguliers", value:309112},
+    {label:"Nouveaux", value:119202},
+    {label:"A risque", value:82904}
+  ];
+  const segCountData = [
+    {label:"Champions", value:491},
+    {label:"Fidèles", value:1277},
+    {label:"Perdus", value:1505},
+    {label:"Réguliers", value:635},
+    {label:"Nouveaux", value:233},
+    {label:"A risque", value:197}
+  ];
+  hBarChart("chart-seg-rev", segData, {W:300,H:280,ml:90,mr:44,mt:4,mb:4, color:css('--series-blue'), valueFmt: v => '£'+Math.round(v/1000)+'k'});
+  hBarChart("chart-seg-count", segCountData, {W:300,H:280,ml:90,mr:36,mt:4,mb:4, color:css('--series-blue'), valueFmt: v => v.toLocaleString('fr-FR')});
+
+  /* ---- 8. Pareto curve ---- */
+  (function(){
+    const px = [0.02,2.58,5.14,7.70,10.26,12.84,15.40,17.96,20.52,23.08,25.66,28.22,30.77,33.33,35.89,38.47,41.03,43.59,46.15,48.71,51.29,53.85,56.41,58.97,61.53,64.11,66.67,69.23,71.78,74.34,76.92,79.48,82.04,84.60,87.16,89.74,92.30,94.86,97.42,100.0];
+    const py = [3.20,40.86,49.88,56.17,61.13,65.33,68.86,71.95,74.66,77.08,79.27,81.22,82.98,84.58,86.02,87.35,88.56,89.66,90.66,91.59,92.45,93.24,93.98,94.66,95.27,95.84,96.36,96.83,97.27,97.68,98.07,98.41,98.72,98.99,99.24,99.45,99.64,99.80,99.93,100.0];
+    const svg = document.getElementById("chart-pareto");
+    const W=560,H=380,ML=50,MR=16,MT=14,MB=40;
+    const plotW=W-ML-MR, plotH=H-MT-MB;
+    function xOf(v){ return ML+(v/100)*plotW; }
+    function yOf(v){ return MT+plotH-(v/100)*plotH; }
+    const blue = css('--series-blue');
+
+    [0,20,40,60,80,100].forEach(function(t){
+      const y=yOf(t), x=xOf(t);
+      svg.appendChild(el('line',{x1:ML,x2:W-MR,y1:y,y2:y,class:'grid-line'}));
+      const ly=el('text',{x:ML-8,y:y+3,class:'axis-label','text-anchor':'end'}); ly.textContent=t+'%'; svg.appendChild(ly);
+      const lx=el('text',{x:x,y:H-16,class:'axis-label','text-anchor':'middle'}); lx.textContent=t+'%'; svg.appendChild(lx);
+    });
+
+    // diagonal reference (perfect equality)
+    svg.appendChild(el('line',{x1:xOf(0),y1:yOf(0),x2:xOf(100),y2:yOf(100), stroke:css('--ink-muted'),'stroke-width':1,'stroke-dasharray':'4,4'}));
+
+    let path="";
+    px.forEach(function(x,i){ const X=xOf(x),Y=yOf(py[i]); path += (i===0?"M":"L")+X+","+Y+" "; });
+    svg.appendChild(el('path',{d:path, fill:'none', stroke:blue,'stroke-width':2.5}));
+
+    // 20% marker
+    svg.appendChild(el('line',{x1:xOf(20),x2:xOf(20),y1:yOf(0),y2:yOf(74.1), stroke:css('--accent'),'stroke-width':1.5,'stroke-dasharray':'3,3'}));
+    svg.appendChild(el('line',{x1:xOf(0),x2:xOf(20),y1:yOf(74.1),y2:yOf(74.1), stroke:css('--accent'),'stroke-width':1.5,'stroke-dasharray':'3,3'}));
+    svg.appendChild(el('circle',{cx:xOf(20),cy:yOf(74.1),r:4.5, fill:css('--accent')}));
+    const tag = el('text',{x:xOf(20)+8,y:yOf(74.1)-8,class:'value-tag'});
+    tag.textContent = '20% des clients -> 74,1% du CA';
+    svg.appendChild(tag);
+
+    const xl=el('text',{x:ML+plotW/2,y:H-2,class:'axis-label','text-anchor':'middle'}); xl.textContent='% cumulé des clients'; svg.appendChild(xl);
+    const yl=el('text',{x:14,y:MT+plotH/2,class:'axis-label','text-anchor':'middle',transform:'rotate(-90 14 '+(MT+plotH/2)+')'}); yl.textContent='% cumulé du CA'; svg.appendChild(yl);
+  })();
+
+})();
+</script>
+</body>
+</html>
