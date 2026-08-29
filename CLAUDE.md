@@ -13,12 +13,12 @@ Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Int
 - `index.html` — page unique, sections `#profil`, `#projets`, `#competences`, `#experience`, `#contact`.
 - `assets/css/style.css` — tous les styles. Palette sobre (blanc cassé + accent indigo), pas de fond quadrillé.
 - `assets/js/main.js` — comportement du menu mobile uniquement.
-- `assets/images/` — `portrait.png` (hero).
-- `assets/documents/` — CV, mémoire et slides de recherche.
+- `assets/images/` — `portrait.png` (hero), `prix_reels_vs_predits.png` (projet immobilier Nancy).
+- `assets/documents/` — CV, mémoire et slides de recherche, notebook et dataset du projet immobilier.
 
 ## Projets (vérifiés comme réels, appartenant à Amadou Ly)
 - **Nombres de Salem de trace −3** — mémoire de recherche M1 (co-écrit avec Ancelle Priscille Nahimana, dir. Jean-Marc Sac-Épée). Fichiers : `Memoire_Nombres_de_Salem.pdf`, `Presentation_Nombres_de_Salem.pdf`.
-- Le projet "Prédiction des prix immobiliers à Metz" a été retiré du site à la demande du propriétaire (29/08/2026) ; ses fichiers ont été supprimés du dépôt.
+- **Prédiction des prix immobiliers à Nancy** — données réelles DVF (data.gouv.fr), 2021-2024, ~8 700 transactions après nettoyage. Metz n'a pas de données DVF publiques (régime du Livre Foncier en Alsace-Moselle) ; Nancy a été choisie comme ville la plus proche disposant de données complètes. Régression linéaire vs Random Forest sur le prix log-transformé, avec longitude/latitude comme variables de localisation. Fichiers : `prediction_prix_immobilier_nancy.ipynb`, `nancy_dvf_clean.csv`, `prix_reels_vs_predits.png`. Ne jamais présenter ces données comme concernant Metz.
 - Ne jamais réintroduire de projet générique/inventé (ex. classification de maladies cardiovasculaires, dashboard Power BI) sans fichier source réel fourni par le propriétaire.
 
 ## Règles

@@ -85,6 +85,22 @@
         </div>
       </article>
 
+      <article class="figure">
+        <div class="fig-label">Fig. 2 — Régression</div>
+        <img src="assets/images/prix_reels_vs_predits.png" alt="Nuage de points prix réels vs prix prédits, avec droite y=x" style="width:100%; border-radius:4px; margin-bottom:14px; border:1px solid var(--rule);">
+        <h3>Prédiction des prix immobiliers à Nancy</h3>
+        <ul>
+          <li>Données réelles DVF (data.gouv.fr), 2021-2024 — Metz n'a pas de données DVF publiques (régime du Livre Foncier en Alsace-Moselle)</li>
+          <li>Nettoyage (dédoublonnage, filtrage des valeurs aberrantes) sur ~8 700 transactions</li>
+          <li>Régression linéaire vs Random Forest sur le prix log-transformé ; R² ≈ 0,49 avec géolocalisation GPS</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>Open data</span></div>
+        <div class="cta-row" style="margin-top:12px;">
+          <a href="assets/documents/prediction_prix_immobilier_nancy.ipynb" class="btn btn-ghost" style="padding:8px 14px; font-size:0.82rem;" target="_blank" rel="noopener">Notebook</a>
+          <a href="assets/documents/nancy_dvf_clean.csv" class="btn btn-ghost" style="padding:8px 14px; font-size:0.82rem;" target="_blank" rel="noopener">Données (CSV)</a>
+        </div>
+      </article>
+
     </div>
   </section>
 
