@@ -11,7 +11,8 @@ Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Int
 
 ## Structure
 - `index.html` — page unique, sections `#profil`, `#projets`, `#competences`, `#experience`, `#contact`.
-- `assets/css/style.css` — tous les styles. Palette sobre (blanc cassé + accent indigo), pas de fond quadrillé.
+- `rapport-immobilier-nancy.html` — page de rapport détaillé (autonome, sa propre palette/typo Newsreader+Public Sans) pour le projet immobilier Nancy, avec graphiques SVG générés depuis des données réelles. Liée depuis la carte projet et depuis GitHub Pages directement (pas de dépendance à un Artifact externe).
+- `assets/css/style.css` — tous les styles de `index.html`. Palette sobre (blanc cassé + accent indigo), pas de fond quadrillé.
 - `assets/js/main.js` — comportement du menu mobile uniquement.
 - `assets/images/` — `portrait.png` (hero), `prix_reels_vs_predits.png` (projet immobilier Nancy).
 - `assets/documents/` — CV, mémoire et slides de recherche, notebook et dataset du projet immobilier.
