@@ -34,11 +34,11 @@ Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Int
 - Avant toute modification importante : proposer un plan court et attendre validation.
 
 ## Contact
-- Email : lyamadou0212@gmail.com (confirmé par le propriétaire du site — le CV mentionne ly643092@gmail.com, mais lyamadou0212@gmail.com est l'adresse à utiliser)
+- Email : lyamadou0212@gmail.com (confirmé par le propriétaire du site)
 - Téléphone : 07 59 86 12 92
 - LinkedIn : https://www.linkedin.com/in/amadou-ly-b8559b348/
 - GitHub : https://github.com/lyamadou0212-oss
-- CV : `assets/documents/CV_Amadou_LY.pdf`
+- CV : `assets/documents/CV_Amadou_LY.pdf` — version "CV_Amadou_LY_Stage_Data_2027", corrigée le 30/08/2026 pour lister uniquement les 3 vrais projets du portfolio (immobilier Nancy, ventes entreprise, mémoire Salem). L'ancienne version mentionnait un projet fictif "prédiction des maladies cardiovasculaires" et décrivait le projet ventes comme du Power BI (inexact) — ne jamais réintroduire ces mentions.
 
 ## À vérifier
 - Confirmer que le numéro de téléphone personnel peut rester public sur un site indexé.
