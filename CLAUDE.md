@@ -1,7 +1,7 @@
 # Portfolio Amadou Ly
 
 Projet : portfolio professionnel statique en HTML, CSS et JavaScript (une seule page, sections ancrées).
-Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Intelligence Artificielle (disponibilité à partir de 2027).
+Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Intelligence Artificielle (disponibilité à partir d'avril 2027).
 
 ## Priorités
 - Clarté du message (profil, projets, compétences, parcours, contact).
@@ -38,7 +38,7 @@ Public : recruteurs et entreprises pour un stage de 6 mois en Data Science / Int
 - Téléphone : 07 59 86 12 92
 - LinkedIn : https://www.linkedin.com/in/amadou-ly-b8559b348/
 - GitHub : https://github.com/lyamadou0212-oss
-- CV : `assets/documents/CV_Amadou_LY.pdf` — version "CV_Amadou_LY_Stage_Data_2027", corrigée le 30/08/2026 pour lister uniquement les 3 vrais projets du portfolio (immobilier Nancy, ventes entreprise, mémoire Salem). L'ancienne version mentionnait un projet fictif "prédiction des maladies cardiovasculaires" et décrivait le projet ventes comme du Power BI (inexact) — ne jamais réintroduire ces mentions.
+- CV : `assets/documents/CV_Amadou_LY.pdf` — remplacé le 02/10/2026 par "CV_Amadou_LY_Stage_Data" (stage à partir d'avril 2027, ajoute les stages Crédit Mutuel et ANSD). Version précédente corrigée le 30/08/2026 pour lister uniquement les 3 vrais projets du portfolio (immobilier Nancy, ventes entreprise, mémoire Salem). L'ancienne version mentionnait un projet fictif "prédiction des maladies cardiovasculaires" et décrivait le projet ventes comme du Power BI (inexact) — ne jamais réintroduire ces mentions.
 
 ## À vérifier
 - Confirmer que le numéro de téléphone personnel peut rester public sur un site indexé.
